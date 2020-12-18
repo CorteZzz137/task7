@@ -80,8 +80,8 @@ void task7_1() {
 
 void task7_2() {
 	setlocale(LC_ALL, "Rus.1251");
-	ifstream fin("in.txt");
-	ofstream fout("out.txt");
+	ifstream fin("in2.txt");
+	ofstream fout("out2.txt");
 	string s;
 	getline(fin, s);
 	trim_right(s);
@@ -128,13 +128,15 @@ void task7_2() {
 
 void task7_3() {
 	setlocale(LC_ALL, "Rus.1251");
+	ifstream fin("in3.txt");
 	int n, m;
 	long long tmp;
-	cin >> n >> m;
+	fin >> n >> m;
 	vector<diag> a(n+m-1);
 	for (int j = 0; j < m; j++) {
 		for (int i = 0; i < n; i++) {
-			cin >> tmp;
+			fin >> tmp;
+			cout << tmp << " ";
 			a[i + j].len++;
 			a[i + j].sum += tmp;
 			a[i + j].max = max(a[i + j].max, tmp);
@@ -142,6 +144,7 @@ void task7_3() {
 
 
 		}
+		cout << endl;
 	}
 	
 	sort(a.begin(), a.end(), comp);
@@ -149,14 +152,14 @@ void task7_3() {
 		cout << "Диагональ " << i.n << ": длина - " << i.len << ", сумма - " << i.sum << ", максимум - " << i.max << endl;
 	}
 
-
+	fin.close();
 
 
 
 }
 
 int main() {
-	task7_2();
+	task7_3();
 	return 0;
 }
 
