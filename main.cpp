@@ -7,6 +7,18 @@
 
 using namespace std;
 
+void trim_right(string& s){
+	if(s.size()>=1)
+	while (*(s.end()-1) == ' ')
+		s.erase(s.size() - 1, 1);
+}
+
+void trim_left(string& s) {
+	if (s.size() >= 1)
+		while (*(s.begin()) == ' ')
+			s.erase(s.begin());
+}
+
 struct diag {
 	int len = 0;
 	long long sum = 0;
@@ -72,28 +84,34 @@ void task7_2() {
 	ofstream fout("out.txt");
 	string s;
 	getline(fin, s);
+	trim_right(s);
 	vector<string> roles;
 	if (s == "roles:") {
 		getline(fin, s);
+		trim_right(s);
 		while (s != "textLines:") {
 			
 			roles.push_back(s);
 			getline(fin, s);
+			trim_right(s);
 		}
 	}
 	int i = 1;
 	map<string, vector<pair<int, string>>> a;
 	while (!fin.eof()) {
 		getline(fin, s);
+		trim_right(s);
 		if (s.find(":") != string::npos) {
 			string tmp = s;
 			tmp.erase(s.find(":"), s.size()-s.find(":"));
-			s.erase(0, s.find(":")+2);
+			s.erase(0, s.find(":")+1);
+			trim_left(s);
 			a[tmp].push_back(make_pair(i, s));
 			i++;
 		}
 	}
 	for (auto& i : roles) {
+		
 		fout << i << ":" << endl;
 		for (auto& j : a[i]) {
 			fout << j.first << ") " << j.second << endl;
@@ -138,7 +156,7 @@ void task7_3() {
 }
 
 int main() {
-	task7_3();
+	task7_2();
 	return 0;
 }
 
@@ -148,7 +166,7 @@ int main() {
 //6 23 11 15
 
 
-
+//ÐÀÇÎÁÐÀÒÜÑß Ñ ÏÐÎÁÅËÀÌÈ Â ÊÎÍÖÅ!!!
 
 
 //apple - malum, pomum, popula
