@@ -47,16 +47,18 @@ bool comp(diag& a, diag& b) {
 }
 
 void task7_1() {
+	setlocale(LC_ALL, "Rus.1251");
+	ifstream fin("in1.txt");
 	int n;
-	cin >> n;
+	fin >> n;
 	string s, tmp;
-	getline(cin, s);
+	getline(fin, s);
 	map<string, vector<string>> a;
 	vector<string> words;
 
 	for (int i = 0; i < n; i++) {
-		getline(cin, s);
-		regex reg("[a-zA-Z]+");
+		getline(fin, s);
+		regex reg("[a-zA-Zà-ÿÀ-ß]+");
 		for (sregex_token_iterator it(begin(s), end(s), reg), last; it != last; ++it) {
 			words.push_back(it->str());
 		}
@@ -76,6 +78,7 @@ void task7_1() {
 			}
 		}
 	}
+	fin.close();
 }
 
 void task7_2() {
@@ -159,7 +162,7 @@ void task7_3() {
 }
 
 int main() {
-	task7_3();
+	task7_1();
 	return 0;
 }
 
